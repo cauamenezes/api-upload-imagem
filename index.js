@@ -8,7 +8,14 @@ app.use(express.urlencoded({extended:true, limit: '5MB'}));
 
 app.post('./testeUpload', (req, res)=>{
 
-    
+    let buffer = new Buffer.from(req.body.file, 'base64');
+
+    let imageName = './upload' + Date.now().toString() + '.jpg';
+
+    fs.writeFileSync(imageName, buffer, 'base64', (error)=>{
+
+        if(error) console.log(error);
+    });
 
 });
 
